@@ -412,6 +412,22 @@ class Plans(IncrementalStripeStream):
         return "plans"
 
 
+class Prices(IncrementalStripeStream):
+    """
+    API docs: https://stripe.com/docs/api/prices/list
+    """
+
+    cursor_field = "created"
+
+    def path(self, **kwargs):
+        return "prices"
+
+    def request_params(self, stream_slice: Mapping[str, Any] = None, **kwargs):
+        params = super().request_params(stream_slice=stream_slice, **kwargs)
+        params["expand[]"] = ["data.tiers"]
+        return params
+
+
 class Products(IncrementalStripeStream):
     """
     API docs: https://stripe.com/docs/api/products/list
