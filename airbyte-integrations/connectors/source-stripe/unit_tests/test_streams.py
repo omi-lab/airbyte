@@ -120,7 +120,7 @@ def test_sub_stream(requests_mock):
             "data": [
                 {
                     "id": "il_3",
-                    "object": "line_item",
+                    "object": "line_item"
                 },
             ],
             "has_more": False,
